@@ -6,7 +6,7 @@ namespace TIPSOCCER_Console_Edition
     class Program
     {
         static void Main(string[] args)
-            {
+        {
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             var originalColor = Console.ForegroundColor;
             Console.Clear();
@@ -32,7 +32,7 @@ namespace TIPSOCCER_Console_Edition
                 Console.WriteLine("Your Options Are\n1 Miwola\n2 Fint\n3 Shoot");
                 var action = Console.ReadLine().ToLower();
                 //soccer
-                if (nextLevel == 0) 
+                if (nextLevel == 0)
                 {
                     switch (action)
                     {
@@ -40,21 +40,21 @@ namespace TIPSOCCER_Console_Edition
                         case "miwola":
                         case "m":
                             Console.WriteLine("You try miwola");
-                            if (num < 20)
+                            if (num < 25)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
                                 redTeamScore++;
                             }
-                            else if (num < 45)
+                            else if (num < 51)
                             {
                                 Console.WriteLine("Your miwola was successful and you score");
                                 blueTeamScore++;
                             }
-                            else if (num < 96)
+                            else if (num < 98)
                             {
                                 Console.WriteLine(ballOut);
                             }
-                            else if (num < 98)
+                            else if (num == 98)
                             {
                                 Console.WriteLine("You dead teamed the enemy, gj");
                                 if (redTeamScore == 1)
@@ -90,7 +90,7 @@ namespace TIPSOCCER_Console_Edition
                                 Console.WriteLine("Enemy reads you like a book, you concede a goal");
                                 redTeamScore++;
                             }
-                            else if (num < 65)
+                            else if (num < 69)
                             {
                                 Console.WriteLine("Your fint was successful and you score");
                                 blueTeamScore++;
@@ -117,12 +117,12 @@ namespace TIPSOCCER_Console_Edition
                         case "shoot":
                         case "s":
                             Console.WriteLine("You try to shoot");
-                            if (num < 30)
+                            if (num < 25)
                             {
                                 Console.WriteLine("The ball bounces off the enemy and you concede");
                                 redTeamScore++;
                             }
-                            else if (num < 70)
+                            else if (num < 61)
                             {
                                 Console.WriteLine("Unsaveable! you score");
                                 blueTeamScore++;
@@ -133,13 +133,22 @@ namespace TIPSOCCER_Console_Edition
                             }
                             break;
                         default:
-                            Console.WriteLine("You do nothing, sucky");
-                            redTeamScore++;
+                            Console.Write("You do nothing");
+                            if (num == 69)
+                            {
+                                Console.WriteLine(", but your opponent scores an OWN GOAL");
+                                blueTeamScore++; 
+                            }
+                            else
+                            {
+                                Console.WriteLine(", sucky");
+                                redTeamScore++; 
+                            }
                             break;
                     }
                 }
                 //tennis
-                else if (nextLevel == 1) 
+                else if (nextLevel == 1)
                 {
                     switch (action)
                     {
@@ -147,17 +156,17 @@ namespace TIPSOCCER_Console_Edition
                         case "miwola":
                         case "m":
                             Console.WriteLine("You try miwola");
-                            if (num < 45)
+                            if (num < 49)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
                                 redTeamScore++;
                             }
-                            else if (num < 94)
+                            else if (num < 96)
                             {
                                 Console.WriteLine("Your miwola was successful and you score");
                                 blueTeamScore++;
                             }
-                            else if (num < 97)
+                            else if (num < 98)
                             {
                                 Console.WriteLine("You dead teamed the enemy, gj");
                                 if (redTeamScore == 1)
@@ -193,7 +202,7 @@ namespace TIPSOCCER_Console_Edition
                                 Console.WriteLine("Enemy reads you like a book, you concede a goal");
                                 redTeamScore++;
                             }
-                            else if (num < 97)
+                            else if (num < 99)
                             {
                                 Console.WriteLine("Your fint was successful and you score");
                                 blueTeamScore++;
@@ -216,7 +225,7 @@ namespace TIPSOCCER_Console_Edition
                         case "shoot":
                         case "s":
                             Console.WriteLine("You try to shoot");
-                            if (num < 49)
+                            if (num < 48)
                             {
                                 Console.WriteLine("The ball bounces off the wall and you concede");
                                 redTeamScore++;
@@ -228,13 +237,22 @@ namespace TIPSOCCER_Console_Edition
                             }
                             break;
                         default:
-                            Console.WriteLine("You do nothing, sucky");
-                            redTeamScore++;
+                            Console.Write("You do nothing");
+                            if (num == 69)
+                            {
+                                Console.WriteLine(", but your opponent scores an OWN GOAL");
+                                blueTeamScore++;
+                            }
+                            else
+                            {
+                                Console.WriteLine(", sucky");
+                                redTeamScore++;
+                            }
                             break;
                     }
                 }
                 //acrobatic
-                else if (nextLevel == 2) 
+                else if (nextLevel == 2)
                 {
                     switch (action)
                     {
@@ -242,17 +260,17 @@ namespace TIPSOCCER_Console_Edition
                         case "miwola":
                         case "m":
                             Console.WriteLine("You try miwola");
-                            if (num < 16)
+                            if (num < 20)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
                                 redTeamScore++;
                             }
-                            else if (num < 44)
+                            else if (num < 46)
                             {
                                 Console.WriteLine("Everything and everyone is in enemies' goal, you score");
                                 blueTeamScore++;
                             }
-                            else if (num < 92)
+                            else if (num < 94)
                             {
                                 Console.WriteLine(ballOut);
                             }
@@ -319,12 +337,12 @@ namespace TIPSOCCER_Console_Edition
                         case "shoot":
                         case "s":
                             Console.WriteLine("You try to shoot");
-                            if (num < 15)
+                            if (num < 20)
                             {
                                 Console.WriteLine("The ball bounces off the enemy and you concede");
                                 redTeamScore++;
                             }
-                            else if (num < 55)
+                            else if (num < 50)
                             {
                                 Console.WriteLine("Unsaveable! you score");
                                 blueTeamScore++;
@@ -335,8 +353,17 @@ namespace TIPSOCCER_Console_Edition
                             }
                             break;
                         default:
-                            Console.WriteLine("You do nothing, sucky");
-                            redTeamScore++;
+                            Console.Write("You do nothing");
+                            if (num == 69)
+                            {
+                                Console.WriteLine(", but your opponent scores an OWN GOAL");
+                                blueTeamScore++;
+                            }
+                            else
+                            {
+                                Console.WriteLine(", sucky");
+                                redTeamScore++;
+                            }
                             break;
                     }
                 }
@@ -424,8 +451,3 @@ namespace TIPSOCCER_Console_Edition
         }
     }
 }
-
-
-
-
-
