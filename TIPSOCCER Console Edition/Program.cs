@@ -372,7 +372,11 @@ namespace TIPSOCCER_Console_Edition
                 else
                 {
                     roundCount++;
-                    nextLevel = rnd.Next(3);
+                    int noSameLevel = nextLevel;
+                    do
+                    {
+                        nextLevel = rnd.Next(3);
+                    } while (noSameLevel == nextLevel);
                     if (nextLevel == 0)
                     {
                         Console.BackgroundColor = ConsoleColor.DarkGreen;
