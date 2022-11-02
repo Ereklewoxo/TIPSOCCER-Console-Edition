@@ -35,7 +35,7 @@ namespace TIPSOCCER_Console_Edition
                 Console.WriteLine("REDS");
                 Console.ForegroundColor = originalColor;
                 var teamChoice = Console.ReadLine().ToLower();
-                if (teamChoice == "1" || teamChoice == "blues" || teamChoice == "blue")
+                if (teamChoice == "1" || teamChoice == "blues" || teamChoice == "blue" || teamChoice == "b")
                 { 
                     userTeam = 1; 
                     Console.Write("You are ");
@@ -43,7 +43,7 @@ namespace TIPSOCCER_Console_Edition
                     Console.Write("BLUES");
                     Console.ForegroundColor = originalColor;
                 }
-                else if (teamChoice == "2" || teamChoice == "reds" || teamChoice == "red")
+                else if (teamChoice == "2" || teamChoice == "reds" || teamChoice == "red" || teamChoice == "r")
                 {   
                     userTeam = 2; 
                     Console.Write("You are ");
