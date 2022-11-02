@@ -14,23 +14,69 @@ namespace TIPSOCCER_Console_Edition
             int nextLevel = 0;
             var levelList = new List<string> { "Soccer", "Tennis", "Acrobatic" };
             int roundCount = 1;
-            uint redTeamScore = 0;
-            uint blueTeamScore = 0;
-            bool blueUltraWin = false;
-            bool redUltraWin = false;
+            int enemyTeamScore = 0;
+            int userTeamScore = 0;
+            bool userUltraWin = false;
+            bool enemyUltraWin = false;
             bool userWantsToPlay = true;
+            int secretTeam = rnd.Next(999);
+            int userTeam;
             string ballOut = "The ball is out";
-            Console.Write("   TIPSOCCER\nConsole Edition\n\nThe Game Starts\nYou are ");
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("BLUES");
-            Console.ForegroundColor = originalColor;
+            Console.Write("   TIPSOCCER\nConsole Edition\n");
+            //choose your team
+            do 
+            { 
+                Console.Write("\nChoose your team\n1");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" BLUES   ");
+                Console.ForegroundColor = originalColor;
+                Console.Write("2 ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("REDS");
+                Console.ForegroundColor = originalColor;
+                var teamChoice = Console.ReadLine().ToLower();
+                if (teamChoice == "1" || teamChoice == "blues" || teamChoice == "blue")
+                { 
+                    userTeam = 1; 
+                    Console.Write("You are ");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Write("BLUES");
+                    Console.ForegroundColor = originalColor;
+                }
+                else if (teamChoice == "2" || teamChoice == "reds" || teamChoice == "red")
+                {   
+                    userTeam = 2; 
+                    Console.Write("You are ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("REDS");
+                    Console.ForegroundColor = originalColor;
+                }
+                else if (teamChoice == secretTeam.ToString())
+                {
+                    userTeam = 3;
+                    Console.Write("You unlocked secret team ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("CYAN");
+                    Console.ForegroundColor = originalColor;
+                }
+                else
+                {                    
+                    userTeam = 0;
+                    secretTeam++;
+                    if (teamChoice == secretTeam.ToString())
+                    { Console.WriteLine("Pain is easier to endure than an itch"); }
+                    Console.WriteLine("Invalid input, try again");
+                    secretTeam = rnd.Next(1);
+                }
+            } while (userTeam == 0);
             do
             {
-                Console.WriteLine($"\nRound {roundCount}");
+                Console.Write($"\nRound {roundCount} - ");
                 Console.WriteLine(levelList[nextLevel]);
                 int num = rnd.Next(100);
-                Console.WriteLine("Your Options Are\n1 Miwola\n2 Fint\n3 Shoot");
+                Console.Write("Your Options Are\n1 Miwola\n2 Fint\n3 Shoot\n");
                 var action = Console.ReadLine().ToLower();
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
                 //soccer
                 if (nextLevel == 0)
                 {
@@ -43,12 +89,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 25)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 51)
                             {
                                 Console.WriteLine("Your miwola was successful and you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else if (num < 98)
                             {
@@ -57,27 +103,27 @@ namespace TIPSOCCER_Console_Edition
                             else if (num == 98)
                             {
                                 Console.WriteLine("You dead teamed the enemy, gj");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("You got dead teamed, ishh");
-                                if (blueTeamScore == 1)
+                                if (userTeamScore == 1)
                                 {
-                                    blueTeamScore--;
-                                    redUltraWin = true;
+                                    userTeamScore--;
+                                    enemyUltraWin = true;
                                 }
-                                else if (blueTeamScore > 0)
+                                else if (userTeamScore > 0)
                                 {
-                                    blueTeamScore--;
+                                    userTeamScore--;
                                 }
                             }
                             break;
@@ -88,24 +134,24 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 35)
                             {
                                 Console.WriteLine("Enemy reads you like a book, you concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 69)
                             {
                                 Console.WriteLine("Your fint was successful and you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else if (num == 99)
                             {
                                 Console.WriteLine("You confused the enemy and they got dead teamed");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             else
@@ -120,12 +166,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 25)
                             {
                                 Console.WriteLine("The ball bounces off the enemy and you concede");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 61)
                             {
                                 Console.WriteLine("Unsaveable! you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else
                             {
@@ -137,12 +183,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num == 69)
                             {
                                 Console.WriteLine(", but your opponent scores an OWN GOAL");
-                                blueTeamScore++; 
+                                userTeamScore++; 
                             }
                             else
                             {
                                 Console.WriteLine(", sucky");
-                                redTeamScore++; 
+                                enemyTeamScore++; 
                             }
                             break;
                     }
@@ -159,37 +205,37 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 49)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 96)
                             {
                                 Console.WriteLine("Your miwola was successful and you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else if (num < 98)
                             {
                                 Console.WriteLine("You dead teamed the enemy, gj");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("You got dead teamed, ishh");
-                                if (blueTeamScore == 1)
+                                if (userTeamScore == 1)
                                 {
-                                    blueTeamScore--;
-                                    redUltraWin = true;
+                                    userTeamScore--;
+                                    enemyUltraWin = true;
                                 }
-                                else if (blueTeamScore > 0)
+                                else if (userTeamScore > 0)
                                 {
-                                    blueTeamScore--;
+                                    userTeamScore--;
                                 }
                             }
                             break;
@@ -200,24 +246,24 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 40)
                             {
                                 Console.WriteLine("Enemy reads you like a book, you concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 99)
                             {
                                 Console.WriteLine("Your fint was successful and you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else
                             {
                                 Console.WriteLine("You confused the enemy and they got dead teamed");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             break;
@@ -228,12 +274,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 48)
                             {
                                 Console.WriteLine("The ball bounces off the wall and you concede");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else
                             {
                                 Console.WriteLine("Sniper shot! you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             break;
                         default:
@@ -241,12 +287,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num == 69)
                             {
                                 Console.WriteLine(", but your opponent scores an OWN GOAL");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else
                             {
                                 Console.WriteLine(", sucky");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             break;
                     }
@@ -263,12 +309,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 20)
                             {
                                 Console.WriteLine("You fail miserably and concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 46)
                             {
                                 Console.WriteLine("Everything and everyone is in enemies' goal, you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else if (num < 94)
                             {
@@ -277,27 +323,27 @@ namespace TIPSOCCER_Console_Edition
                             else if (num < 97)
                             {
                                 Console.WriteLine("You dead teamed the enemy, gj");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("You got dead teamed, ishh");
-                                if (blueTeamScore == 1)
+                                if (userTeamScore == 1)
                                 {
-                                    blueTeamScore--;
-                                    redUltraWin = true;
+                                    userTeamScore--;
+                                    enemyUltraWin = true;
                                 }
-                                else if (blueTeamScore > 0)
+                                else if (userTeamScore > 0)
                                 {
-                                    blueTeamScore--;
+                                    userTeamScore--;
                                 }
                             }
                             break;
@@ -308,12 +354,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 35)
                             {
                                 Console.WriteLine("Enemy reads you like a book, you concede a goal");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 65)
                             {
                                 Console.WriteLine("Your fint was successful and you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else if (num < 98)
                             {
@@ -322,14 +368,14 @@ namespace TIPSOCCER_Console_Edition
                             else
                             {
                                 Console.WriteLine("You confused the enemy and they got dead teamed");
-                                if (redTeamScore == 1)
+                                if (enemyTeamScore == 1)
                                 {
-                                    redTeamScore--;
-                                    blueUltraWin = true;
+                                    enemyTeamScore--;
+                                    userUltraWin = true;
                                 }
-                                else if (redTeamScore > 0)
+                                else if (enemyTeamScore > 0)
                                 {
-                                    redTeamScore--;
+                                    enemyTeamScore--;
                                 }
                             }
                             break;
@@ -340,12 +386,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num < 20)
                             {
                                 Console.WriteLine("The ball bounces off the enemy and you concede");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             else if (num < 50)
                             {
                                 Console.WriteLine("Unsaveable! you score");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else
                             {
@@ -357,12 +403,12 @@ namespace TIPSOCCER_Console_Edition
                             if (num == 69)
                             {
                                 Console.WriteLine(", but your opponent scores an OWN GOAL");
-                                blueTeamScore++;
+                                userTeamScore++;
                             }
                             else
                             {
                                 Console.WriteLine(", sucky");
-                                redTeamScore++;
+                                enemyTeamScore++;
                             }
                             break;
                     }
@@ -371,30 +417,51 @@ namespace TIPSOCCER_Console_Edition
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = originalColor;
                 Console.WriteLine("\n      The Score Is");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.Write($"BLUE TEAM {blueTeamScore}");
-                Console.ForegroundColor = originalColor;
-                Console.Write(" - ");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{redTeamScore} RED TEAM");
+                if (userTeam == 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Write($"BLUE TEAM {userTeamScore}");
+                    Console.ForegroundColor = originalColor;
+                    Console.Write(" - ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{enemyTeamScore} RED TEAM");
+                }
+                else if (userTeam == 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($"RED TEAM {userTeamScore}");
+                    Console.ForegroundColor = originalColor;
+                    Console.Write(" - ");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine($"{enemyTeamScore} BLUE TEAM");
+                }
+                if (userTeam == 3)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write($"CYAN TEAM {userTeamScore}");
+                    Console.ForegroundColor = originalColor;
+                    Console.Write(" - ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{enemyTeamScore} RED TEAM");
+                }
                 Console.ForegroundColor = originalColor;
                 //ultra clean sheet terms
-                if (blueTeamScore > 0)
-                { redUltraWin = false; }
-                if (redTeamScore > 0)
-                { blueUltraWin = false; }
+                if (userTeamScore > 0)
+                { enemyUltraWin = false; }
+                if (enemyTeamScore > 0)
+                { userUltraWin = false; }
                 //game outcome checks
-                if (redUltraWin == true && redTeamScore == 5)
+                if (enemyUltraWin == true && enemyTeamScore == 5)
                 { Console.WriteLine("YOU GOT ULTRA CLEAN SHAT ON"); }
-                else if (blueUltraWin == true && blueTeamScore == 5)
+                else if (userUltraWin == true && userTeamScore == 5)
                 { Console.WriteLine("YOU WON ULTRA CLEAN SHEET"); }
-                else if (blueTeamScore == 5 && redTeamScore == 0)
+                else if (userTeamScore == 5 && enemyTeamScore == 0)
                 { Console.WriteLine("     CLEAN SHEET WIN"); }
-                else if (blueTeamScore == 5)
+                else if (userTeamScore == 5)
                 { Console.WriteLine("         YOU WIN"); }
-                else if (redTeamScore == 5 && blueTeamScore == 0)
+                else if (enemyTeamScore == 5 && userTeamScore == 0)
                 { Console.WriteLine("    CLEAN SHEET LOSER"); }
-                else if (redTeamScore == 5)
+                else if (enemyTeamScore == 5)
                 { Console.WriteLine("          LOSER"); }
                 else
                 {
@@ -427,15 +494,30 @@ namespace TIPSOCCER_Console_Edition
                     Console.BackgroundColor = ConsoleColor.DarkGreen;
                     Console.Clear();
                     roundCount = 1;
-                    redTeamScore = 0;
-                    blueTeamScore = 0;
-                    blueUltraWin = false;
-                    redUltraWin = false;
+                    enemyTeamScore = 0;
+                    userTeamScore = 0;
+                    userUltraWin = false;
+                    enemyUltraWin = false;
                     nextLevel = 0;
-                    Console.Write("   TIPSOCCER\nConsole Edition\n\nThe Game Starts\nYou are ");
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.Write("BLUES");
-                    Console.ForegroundColor = originalColor;
+                    Console.Write("   TIPSOCCER\nConsole Edition\n\nNew Game Starts\nYou are ");
+                    if (userTeam == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write("BLUES");
+                        Console.ForegroundColor = originalColor;
+                    }
+                    if (userTeam == 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("REDS");
+                        Console.ForegroundColor = originalColor;
+                    }
+                    if (userTeam == 3)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("CYANS");
+                        Console.ForegroundColor = originalColor;
+                    }
                 }
                 else if (playAgain == "2" || playAgain == "no")
                 {
