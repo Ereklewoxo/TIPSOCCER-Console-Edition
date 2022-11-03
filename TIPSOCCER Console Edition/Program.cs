@@ -42,7 +42,6 @@ namespace TIPSOCCER_Console_Edition
                     Console.Write("You are ");
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine("BLUES");
-                    Console.ForegroundColor = originalColor;
                 }
                 else if (teamChoice == "2" || teamChoice == "reds" || teamChoice == "red" || teamChoice == "r")
                 {   
@@ -50,7 +49,6 @@ namespace TIPSOCCER_Console_Edition
                     Console.Write("You are ");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("REDS");
-                    Console.ForegroundColor = originalColor;
                 }
                 else if (teamChoice == secretTeam.ToString())
                 {
@@ -58,7 +56,6 @@ namespace TIPSOCCER_Console_Edition
                     Console.Write("You unlocked secret team ");
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("CYAN");
-                    Console.ForegroundColor = originalColor;
                 }
                 else
                 {                    
@@ -66,6 +63,7 @@ namespace TIPSOCCER_Console_Edition
                     Console.WriteLine("Invalid input, try again");
                 }
             } while (userTeam == 0);
+            Console.ForegroundColor = originalColor;
             do
             {
                 Console.Write($"\nRound {roundCount} - ");
