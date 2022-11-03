@@ -19,10 +19,10 @@ namespace TIPSOCCER_Console_Edition
             bool userUltraWin = false;
             bool enemyUltraWin = false;
             bool userWantsToPlay = true;
-            int secretTeam = rnd.Next(999);
-            int userTeam;
+            int secretTeam = 1;
+            int userTeam = 0;
             string ballOut = "The ball is out";
-            Console.Write("   TIPSOCCER\nConsole Edition\n");
+            Console.WriteLine("   TIPSOCCER\nConsole Edition");
             //choose your team
             do 
             { 
@@ -35,12 +35,13 @@ namespace TIPSOCCER_Console_Edition
                 Console.WriteLine("REDS");
                 Console.ForegroundColor = originalColor;
                 var teamChoice = Console.ReadLine().ToLower();
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
                 if (teamChoice == "1" || teamChoice == "blues" || teamChoice == "blue" || teamChoice == "b")
                 { 
                     userTeam = 1; 
                     Console.Write("You are ");
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.Write("BLUES");
+                    Console.WriteLine("BLUES");
                     Console.ForegroundColor = originalColor;
                 }
                 else if (teamChoice == "2" || teamChoice == "reds" || teamChoice == "red" || teamChoice == "r")
@@ -48,7 +49,7 @@ namespace TIPSOCCER_Console_Edition
                     userTeam = 2; 
                     Console.Write("You are ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("REDS");
+                    Console.WriteLine("REDS");
                     Console.ForegroundColor = originalColor;
                 }
                 else if (teamChoice == secretTeam.ToString())
@@ -56,17 +57,13 @@ namespace TIPSOCCER_Console_Edition
                     userTeam = 3;
                     Console.Write("You unlocked secret team ");
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("CYAN");
+                    Console.WriteLine("CYAN");
                     Console.ForegroundColor = originalColor;
                 }
                 else
                 {                    
-                    userTeam = 0;
                     secretTeam++;
-                    if (teamChoice == secretTeam.ToString())
-                    { Console.WriteLine("Pain is easier to endure than an itch"); }
                     Console.WriteLine("Invalid input, try again");
-                    secretTeam = rnd.Next(1);
                 }
             } while (userTeam == 0);
             do
@@ -74,7 +71,7 @@ namespace TIPSOCCER_Console_Edition
                 Console.Write($"\nRound {roundCount} - ");
                 Console.WriteLine(levelList[nextLevel]);
                 int num = rnd.Next(100);
-                Console.Write("Your Options Are\n1 Miwola\n2 Fint\n3 Shoot\n");
+                Console.WriteLine("Your Options Are\n1 Miwola\n2 Fint\n3 Shoot");
                 var action = Console.ReadLine().ToLower();
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 //soccer
@@ -421,26 +418,26 @@ namespace TIPSOCCER_Console_Edition
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.Write($"BLUE TEAM {userTeamScore}");
-                    Console.ForegroundColor = originalColor;
-                    Console.Write(" - ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{enemyTeamScore} RED TEAM");
                 }
                 else if (userTeam == 2)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write($"RED TEAM {userTeamScore}");
-                    Console.ForegroundColor = originalColor;
-                    Console.Write(" - ");
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.WriteLine($"{enemyTeamScore} BLUE TEAM");
                 }
-                if (userTeam == 3)
+                else
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write($"CYAN TEAM {userTeamScore}");
-                    Console.ForegroundColor = originalColor;
-                    Console.Write(" - ");
+                }
+                Console.ForegroundColor = originalColor;
+                Console.Write(" - ");
+                if (userTeam == 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine($"{enemyTeamScore} BLUE TEAM");
+                }
+                else
+                {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"{enemyTeamScore} RED TEAM");
                 }
@@ -503,19 +500,19 @@ namespace TIPSOCCER_Console_Edition
                     if (userTeam == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkBlue;
-                        Console.Write("BLUES");
+                        Console.WriteLine("BLUES");
                         Console.ForegroundColor = originalColor;
                     }
                     if (userTeam == 2)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("REDS");
+                        Console.WriteLine("REDS");
                         Console.ForegroundColor = originalColor;
                     }
                     if (userTeam == 3)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write("CYANS");
+                        Console.WriteLine("CYANS");
                         Console.ForegroundColor = originalColor;
                     }
                 }
